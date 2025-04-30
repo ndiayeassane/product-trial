@@ -21,30 +21,7 @@ import { BehaviorSubject, catchError, Observable, of, tap } from "rxjs";
     cartCount$ = this.cartItemCount.asObservable(); 
 
 
-    addToCartShopping(product: Product) {
-        this.items.push(product);
-        this.updateCount();
-      }
-    getItemsProducts(): Product[] {
-        return this.items;
-      }
-    
-      clearCartShopping() {
-        this.items = [];
-        this.updateCount();
-        return this.items;
-      }
 
-      removeFromCart(product: Product) {
-        const index = this.items.findIndex(p => p.id === product.id);
-        if (index !== -1) {
-          this.items.splice(index, 1);
-          this.updateCount();
-        }
-      }
-      private updateCount() {
-        this.cartItemCount.next(this.items.length);
-      }
 
     public get(): Observable<Product[]> {
         return this.http.get<Product[]>(this.path).pipe(
@@ -83,4 +60,29 @@ import { BehaviorSubject, catchError, Observable, of, tap } from "rxjs";
             tap(() => this._products.update(products => products.filter(product => product.id !== productId))),
         );
     }
+
+    addToCartShopping(product: Product) {
+        this.items.push(product);
+        this.updateCount();
+      }
+    getItemsProducts(): Product[] {
+        return this.items;
+      }
+    
+      clearCartShopping() {
+        this.items = [];
+        this.updateCount();
+        return this.items;
+      }
+
+      removeFromCart(product: Product) {
+        const index = this.items.findIndex(p => p.id === product.id);
+        if (index !== -1) {
+          this.items.splice(index, 1);
+          this.updateCount();
+        }
+      }
+      private updateCount() {
+        this.cartItemCount.next(this.items.length);
+      }
 }

@@ -18,11 +18,14 @@ import { ProductsService } from "./products/data-access/products.service";
 export class AppComponent implements OnInit{
   title = "ALTEN SHOP";
 
+  //Initialise la variable a 0
   cartCount = 0;
 
   constructor(private productService: ProductsService) {}
 
   ngOnInit() {
+
+    // on recupere le nombre de products ajoutes dans le panier
     this.productService.cartCount$.subscribe(count => {
       this.cartCount = count;
     });
