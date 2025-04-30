@@ -1,0 +1,7 @@
+<h2>Panier</h2>
+<ul>
+  <li *ngFor="let item of items">
+    {{ item.name }} - {{ item.price }} €
+    <button (click)="removeItem(item)">🗑 Supprimer</button>
+  </li>
+</ul>
